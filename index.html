@@ -10,18 +10,41 @@
         }
 
         body {
+            margin: 0;
+            padding: 16pt;
             text-align: center;
+        }
+
+        #out {
+            font-family: 'Consolas', monospace;
+            font-size: 24pt;
+            line-height: 32pt;
+            min-height: 32pt;
+            background-color: #000;
+            color: #0f0;
+        }
+
+        h1,
+        h2,
+        p {
+            margin: 2pt;
+        }
+
+        #wasm-logo {
+            width: 64pt;
         }
     </style>
     <link rel="icon" href="web-assembly-icon.svg">
 </head>
 
 <body>
-    <img src="web-assembly-icon.svg">
+    <img id="wasm-logo" src="web-assembly-icon.svg">
     <h1>WebAssembly Hello World</h1>
-    <p>The text after this should say "Hello World!"</p>
-    <div id="out"></div>
-    <p><a href="https://github.com/addiment/wasm-with-clang/">GitHub</a></p>
+    <p>The text after this should read "Hello World!", which will be printed from the</p>
+    <div id="out">
+        a
+    </div>
+    <p><i>See it on <a href="https://github.com/addiment/wasm-with-clang/">GitHub</a></i></p>
     <script src="./index.js"></script>
 </body>
 
