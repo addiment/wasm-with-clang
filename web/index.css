@@ -1,0 +1,28 @@
+* {
+    font-family: Helvetica, 'Roboto', Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 16pt;
+    text-align: center;
+}
+
+#out {
+    font-family: 'Consolas', monospace;
+    font-size: 24pt;
+    line-height: 32pt;
+    min-height: 32pt;
+    background-color: #000;
+    color: #0f0;
+}
+
+h1,
+h2,
+p {
+    margin: 2pt;
+}
+
+#wasm-logo {
+    width: 64pt;
+}
