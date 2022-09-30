@@ -2,7 +2,7 @@
 CC = clang
 CFLAGS = -target wasm32 -nostdlib --for-linker=--no-entry
 SRC = main.cpp
-OUT = web/main.wasm
+OUT = main.wasm
 
 default: $(OUT)
 
