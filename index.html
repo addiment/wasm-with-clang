@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>WASM Hello World</title>
     <link rel="preload" as="style" href="./index.css">
+    <link rel="preload" as="fetch" href="./demo.wasm" type="application/wasm">
     <link rel="stylesheet" href="./index.css">
     <link rel="icon" href="web-assembly-icon.svg">
 </head>
@@ -12,12 +13,13 @@
 <body>
     <img id="wasm-logo" src="web-assembly-icon.svg">
     <h1>WebAssembly Hello World</h1>
-    <p>The text after this should read "Hello World!", which will be called from WASM. If it doesn't, please contact me!</p>
-    <div id="out">
-        
-    </div>
+    <p>The text after this should read "Hello World!", which will be called from WASM.
+        If it doesn't, please contact me!</p>
+    <div id="out"></div>
+
     <p><i>See it on <a href="https://github.com/addiment/wasm-with-clang/">GitHub</a></i></p>
-    <script src="./index.js"></script>
 </body>
+
+<script src="./index.js"></script>
 
 </html>

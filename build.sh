@@ -1,0 +1,1 @@
+clang++ src/main.cpp -I./src -I./include -nostdlib -Wall --for-linker=--no-entry -target wasm32 -O2 -o demo.wasm

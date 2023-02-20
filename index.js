@@ -1,47 +1,29 @@
 const outbox = document.getElementById('out');
 
-const MAX_CSTR_LENGTH = 256;
+let wasmObj = null;
 
-/** @type {WebAssembly.WebAssemblyInstantiatedSource} */
-var wasmInst = undefined;
-
-function main() {
-    wasmInst.exports.helloWorld();
-    return;
-}
-
-try {
-    const importObject = {
-        // called "env" because of wasm-ld and you can't change it, this is literally 1984
-        env: {
-            /**
-             * Good ol' fashioned null-terminated string print function.
-             * @param {number} string Pointer to null-terminated string in memory
-             * @returns {number} whatever {@linkcode console.log()} returns
-             */
-            print(string) {
-                let out = '';
-                let i = 0;
-                /** @type {Uint8Array} */
-                let view = new Uint8Array(wasmInst.exports.memory.buffer, string);
-                while (i < (length || MAX_CSTR_LENGTH)) {
-                    let chr;
-                    chr = view[i];
-                    if (chr == 0x00) break;
-                    out += String.fromCharCode(chr);
-                    i++;
-                }
-                if (i >= (length || MAX_CSTR_LENGTH)) console.error("Failed to terminate string!");
-                outbox.innerText += out + '\n';
-                return console.log(out);
-            }
+const importObject = {
+    // The name of an import module declared in WebAssembly
+    demo: {
+        /**
+         * @param {number} string `const char*`
+         * @param {number} length `size_t`, length of the string (WITHOUT the null terminator!)
+         * @returns {void}
+         */
+        print(string, length) {
+            // Reads a null-terminated string from WebAssembly's memory and prints it.
+            // https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format#webassembly_memory
+            /** @type {Uint8Array} */
+            let buf = new Uint8Array(wasmObj.instance.exports.memory.buffer, string, length);
+            const out = new TextDecoder("utf8").decode(buf);
+            console.log(out);
+            outbox.innerText += out;
+            return;
         }
-    };
+    }
+};
 
-    WebAssembly.instantiateStreaming(fetch("main.wasm"), importObject).then(obj => {
-        wasmInst = obj.instance;
-        main();
-    });
-} catch (err) {
-    console.error(err);
-}
+(async () => {
+    wasmObj = await WebAssembly.instantiateStreaming(fetch("demo.wasm"), importObject);
+    wasmObj.instance.exports.main();
+})();

@@ -1,15 +1,15 @@
 * {
-    font-family: Helvetica, 'Roboto', Arial, sans-serif;
+    font-family: sans-serif;
 }
 
 body {
     margin: 0;
-    padding: 16pt;
+    padding: 8px;
     text-align: center;
 }
 
 #out {
-    font-family: 'Consolas', monospace;
+    font-family: monospace;
     font-size: 24pt;
     line-height: 32pt;
     min-height: 32pt;
